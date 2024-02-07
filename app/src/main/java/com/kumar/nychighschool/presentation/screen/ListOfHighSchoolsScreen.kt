@@ -1,6 +1,5 @@
 package com.kumar.nychighschool.presentation.screen
 
-import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
@@ -25,7 +24,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -45,7 +43,7 @@ import com.kumar.nychighschool.network.NetworkRequestStatus
 import com.kumar.nychighschool.presentation.viewmodel.ListOfHighSchoolsViewModel
 
 data class ListOfHighSchoolsUiState(
-    val networkRequestStatus: NetworkRequestStatus = NetworkRequestStatus.Loading,
+    val networkRequestStatus: NetworkRequestStatus<List<HighSchool>> = NetworkRequestStatus.Loading(),
 )
 
 @Composable
@@ -61,14 +59,14 @@ fun ListOfHighSchoolsScreen(
         contentAlignment = Alignment.Center
     ) {
         when (uiState.networkRequestStatus) {
-            is NetworkRequestStatus.Successed<*> -> {
+            is NetworkRequestStatus.Succeed<*> -> {
                 val response =
-                    uiState.networkRequestStatus as NetworkRequestStatus.Successed<List<HighSchool>>
+                    uiState.networkRequestStatus as NetworkRequestStatus.Succeed<List<HighSchool>>
                 LazyColumn(
                     modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp),
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    items(response.data) {
+                    items(response.value) {
                         HighSchoolItem(highSchool = it,
                             onClick = {
                                 isDetailScreenVisible = true

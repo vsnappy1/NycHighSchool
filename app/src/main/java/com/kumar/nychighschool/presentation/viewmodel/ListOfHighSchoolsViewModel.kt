@@ -27,12 +27,12 @@ class ListOfHighSchoolsViewModel(
     // No public method here, lets do integration test
     private fun fetchHighSchools() {
         viewModelScope.launch {
-            _uiState.postValue(_uiState.value?.copy(networkRequestStatus = NetworkRequestStatus.Loading))
+            _uiState.postValue(_uiState.value?.copy(networkRequestStatus = NetworkRequestStatus.Loading()))
             try {
                 val listOfHighSchool = nycHighSchoolRepository.fetchHighSchools()
                 _uiState.postValue(
                     _uiState.value?.copy(
-                        networkRequestStatus = NetworkRequestStatus.Successed(listOfHighSchool)
+                        networkRequestStatus = NetworkRequestStatus.Succeed(listOfHighSchool)
                     )
                 )
             } catch (e: Exception) {

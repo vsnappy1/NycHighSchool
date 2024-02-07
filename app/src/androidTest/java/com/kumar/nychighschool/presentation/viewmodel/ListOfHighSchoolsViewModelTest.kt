@@ -2,11 +2,9 @@ package com.kumar.nychighschool.presentation.viewmodel
 
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.kumar.nychighschool.domain.data.NycHighSchoolRepository
 import com.kumar.nychighschool.presentation.screen.ListOfHighSchoolsScreen
 import kotlinx.coroutines.test.runTest
-import com.kumar.nychighschool.data.FakeNycHighSchoolRepository
 import com.kumar.nychighschool.data.HighSchool
 import org.junit.Assert.*
 
@@ -34,7 +32,6 @@ class ListOfHighSchoolsViewModelTest {
     @Before
     fun setUp() {
         MockitoAnnotations.openMocks(this)
-        listOfHighSchoolsViewModel = ListOfHighSchoolsViewModel(nycHighSchoolRepository)
     }
 
     @Test
@@ -46,7 +43,8 @@ class ListOfHighSchoolsViewModelTest {
             )
         ).`when`(nycHighSchoolRepository).fetchHighSchools()
 
-
+        listOfHighSchoolsViewModel = ListOfHighSchoolsViewModel(nycHighSchoolRepository)
+        
         composeTestRule.setContent {
             ListOfHighSchoolsScreen(listOfHighSchoolsViewModel)
         }

@@ -10,7 +10,7 @@ android {
     defaultConfig {
         applicationId = "com.kumar.nychighschool"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -88,6 +88,9 @@ dependencies {
     androidTestImplementation("org.mockito.kotlin:mockito-kotlin:4.1.0")
     // Optional -- Mockk framework
     androidTestImplementation("io.mockk:mockk:1.10.5")
+
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.1")
 
 
 }
